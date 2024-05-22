@@ -1,0 +1,43 @@
+.result {
+    position: absolute;
+    top: 450px;
+    left: 870px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#resultBall {
+    width: 100px;
+    height: 100px;
+
+    /* background-color: black; */
+    border-radius: 50%;
+
+    text-align: center;
+    line-height: 100px;
+
+    font-weight: bold;  
+    font-size: 48pt;
+}
+
+#spinBtn {
+    position: absolute;
+    top: 155px;
+    /* left: 80px; */
+    padding: 5px 10px;
+    width: 250px;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+
+    font-family: "Century Gothic";
+    font-weight: bold;
+    font-size: larger;
+}
+
+button:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+#roulette {
+  position: absolute;
+  top: -880px;
+  left: -800px;
+  /* animation: roulette-spin 5s 3.0263 linear forwards; */
+  z-index: -100;
+  user-select: none;
+  --defaultAngle: 18.94deg;
+  rotate: calc(9.47 * 3)deg;
+  --spinTime: 15;
+  transition: transform 7s cubic-bezier(.09,.76,.33,1);
+}
+  
+/* @keyframes roulette-spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+} */
+
+#ball {
+  transform: scale(0.9);
+  position: absolute;
+  top: 390px;
+  left: 385px;
+  user-select: none;
+}

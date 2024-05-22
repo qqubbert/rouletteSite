@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "RalewayRegular"; 
+  src: url("centurygothic.ttf") format("truetype"); 
+  font-style: normal; 
+  font-weight: normal; 
+} 
+
+html {
+  background-color: #13181B;
+  color: white;
+  font-family: "Century Gothic";
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+}
+
+#BgColorRed {
+  position: absolute;
+  top: -500px;
+  left: -1000px;
+  z-index: -1111;
+  opacity: .7;
+}
+
+#BgColorGreen {
+  position: absolute;
+  top: -1500px;
+  left: 300px;
+  z-index: -1111;
+  opacity: .4;
+}
