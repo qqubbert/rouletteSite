@@ -61,3 +61,12 @@ header {
     border: 0;
     outline: 0;
 }
+
+.links {
+    user-select: none;
+}
+
+.links:hover {
+    cursor: pointer;
+    stroke: 1px solid black;
+}

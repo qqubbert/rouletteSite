@@ -7,9 +7,14 @@ import BetTable from './BetTable.jsx';
 import Ball from "./assets/Ball.svg";
 import BgColorRed from "./assets/BgColorRed.svg";
 import BgColorGreen from "./assets/BgColorGreen.svg";
+import SlotMachine from "./assets/SlotMachine.svg";
 
 function App() {
   const [result, setResult] = useState(null);
+  const [roulette, setRoulette] = useState(false);
+  const [slot, setSlot] = useState(true);
+  const [poker, setPoker] = useState(false);
+  const [blackjack, setBlackjack] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [spinCount, setSpinCount] = useState(1080);
@@ -29,13 +34,16 @@ function App() {
   };
 
   function betResults (color, res) {
+    // if (res == 37) {res = "00"};
     console.log(color);
     console.log(res);
     for (let pot of bet) {
       console.log('pot.type: ' + pot.type + ' pot.value: ' + pot.value + ' pot.betCost: ' + pot.betCost);
       switch (pot.type) {
         case "number": 
-          if (pot.value == result) {
+          console.log(`result: ${res}`);
+          console.log(`pot.value: ${pot.value}`);
+          if (pot.value == res) {
             setMoney(current => current + (pot.betCost * 36));
           };
           break;
@@ -193,8 +201,8 @@ function App() {
       case 37:
         setRotationAngle(String(spinCount + 9.47 * 21) + "deg");
         color = "#156108";
-        setResult("00");
-        res = "00";
+        // setResult("00");
+        // res = "00";
         break;
       case 27:
         setRotationAngle(String(spinCount + 9.47 * 20) + "deg");
@@ -279,44 +287,90 @@ function App() {
     setIsSpinning(true);
 
     let randomNumber = getRandomNumber(0, 37);
-    // randomNumber = 37;
-    setRes(randomNumber);
+    // randomNumber = 8;
+    // setRes(randomNumber);
     const color = setRes(randomNumber);
     
     setTimeout(() => {
       if (randomNumber == 37) {randomNumber = "00"};
       betResults(color, randomNumber);
-      setResult(randomNumber);
       document.getElementById('resultBall').style.backgroundColor = color;
       setIsSpinning(false);
       setBet([]);
+      setResult(randomNumber);
     }, 7000);
   }
 
   return (
     <>
-      <Header money={money} />
-      <div className="result">
-        <div id="resultBall">{result !== null ? result : '-'}</div>
-        <div id="resultTxt">результат</div>
-        <button id="spinBtn" onClick={spin} disabled={isSpinning}>
-          {isSpinning ? 'Крутится...' : 'Крутить'}
-        </button>
-      </div>
-      <img
-        id="ball"
-        src={Ball}
-        alt=""
+      <Header 
+        money={money} 
+        roulette={()=>{
+          setRoulette(true); 
+          setSlot(false);
+          setBlackjack(false);
+          setPoker(false);
+        }} 
+        slot={()=>{
+          setRoulette(false); 
+          setPoker(false);
+          setSlot(true);
+          setBlackjack(false);
+        }}
+        poker={()=>{
+          setRoulette(false); 
+          setSlot(false);
+          setBlackjack(false);
+          setPoker(true);
+        }}
+        blackjack={()=>{
+          setRoulette(false); 
+          setSlot(false);
+          setBlackjack(true);
+          setPoker(false);
+        }}
       />
-      <img
-        id="roulette"
-        src={Roulette}
-        alt=""
-        style={{ transform: `rotate(${rotationAngle})` }}
-      />
-      <BetTable refresh={!isSpinning} money={money} blocked={isSpinning} setBet={(allBets, moneyNew)=>{setBet(allBets); setMoney(moneyNew); console.log(allBets)}} setMoney={setMoney}/>
-      <img id="BgColorRed" src={BgColorRed} alt="" />
-      <img id="BgColorGreen" src={BgColorGreen} alt="" />
+      {roulette &&
+      <>
+        <div className="result">
+          <div id="resultBall">{result !== null ? result : '-'}</div>
+          <div id="resultTxt">результат</div>
+          <button id="spinBtn" onClick={spin} disabled={isSpinning}>
+            {isSpinning ? 'Крутится...' : 'Крутить'}
+          </button>
+        </div>
+        <img
+          id="ball"
+          src={Ball}
+          alt=""
+        />
+        <img
+          id="roulette"
+          src={Roulette}
+          alt=""
+          style={{ transform: `rotate(${rotationAngle})` }}
+        />
+        <BetTable refresh={!isSpinning} money={money} blocked={isSpinning} setBet={(allBets, moneyNew)=>{setBet(allBets); setMoney(moneyNew); console.log(allBets)}} setMoney={setMoney}/>
+        <img id="BgColorRed" src={BgColorRed} alt="" />
+        <img id="BgColorGreen" src={BgColorGreen} alt="" />
+      </>
+      }
+      {slot &&
+      <>
+        <div id="slotBets">
+          <label htmlFor="">Текущая ставка: $500</label>
+          <input type="range" />
+          <button>Крутить</button>
+        </div>
+        <div id="cylinders">
+          <div className='cyl' id="cyl1" style={{ backgroundImage: `url(${SlotMachine})` }}></div>
+          <div className='cyl' id="cyl2" style={{ backgroundImage: `url(${SlotMachine})` }}></div>
+          <div className='cyl' id="cyl3" style={{ backgroundImage: `url(${SlotMachine})` }}></div>
+        </div>
+        <img id="BgColorRed" src={BgColorRed} alt="" />
+        <img id="BgColorGreen" src={BgColorGreen} alt="" />
+      </>
+      }
     </>
   );
 }

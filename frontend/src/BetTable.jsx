@@ -70,15 +70,15 @@ export default function BetTable({ setBet, setMoney, blocked, money, refresh }) 
         <>
             <label htmlFor="" id="betSize">Размер ставки: ${currentBet}
                 <div id="betInput">
-                    <label htmlFor="">$0</label>
+                    <label htmlFor="">$10</label>
                     <input 
                         type="range" 
                         min="10" 
-                        max={1000} 
+                        max={money} 
                         value={currentBet} 
                         onChange={(e) => setCurrentBet(Number(e.target.value))}
                     />
-                    <label htmlFor="">$1000</label>
+                    <label htmlFor="">${money}</label>
                 </div>
             </label>
             <table className="betTable">
@@ -130,9 +130,9 @@ export default function BetTable({ setBet, setMoney, blocked, money, refresh }) 
                         <td colSpan="2" className="red" data-type="number" data-side="inside" onClick={handleClick}>21</td>
                     </tr>
                     <tr>
-                        <td colSpan="2" className="black" data-type="number" onClick={handleClick}>22</td>
-                        <td colSpan="2" className="red" data-type="number" onClick={handleClick}>23</td>
-                        <td colSpan="2" className="black" data-type="number" onClick={handleClick}>24</td>
+                        <td colSpan="2" className="black" data-type="number" data-side="inside" onClick={handleClick}>22</td>
+                        <td colSpan="2" className="red" data-type="number" data-side="inside" onClick={handleClick}>23</td>
+                        <td colSpan="2" className="black" data-type="number" data-side="inside" onClick={handleClick}>24</td>
                     </tr>
                     <tr>
                         <td rowSpan="2" className="side"  data-type="odd" data-side="outside" onClick={handleClick}>odd</td>

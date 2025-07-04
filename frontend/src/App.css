@@ -41,3 +41,32 @@
 button:hover {
     cursor: pointer;
 }
+
+#cylinders {
+    position: absolute;
+    left: 220px;
+    top: 120px;
+    width: 1500px;
+    height: 600px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 500px);
+    box-shadow: inset 0px 0px 10px 5px black;
+    border-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.397);
+}
+
+#cylinders .cyl {
+    margin: 0 100px;
+    width: 296px;
+    height: 100vh;
+    background-repeat: repeat-y;
+    background-position: 0px 1650px;
+    box-shadow: 0px 0px 50px 5px black;
+}
+
+#slotBets {
+    position: absolute;
+    left: 220px;
+    top: 770px;
+}
